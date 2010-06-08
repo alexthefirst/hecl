@@ -254,7 +254,7 @@ $form setcurrent
 
 AddSample "File Browser" {
 
-proc FileSelect {infohash bselect bback binfo bwrite cmd menu} {
+proc FileSelect {infohash bselect bback binfo bwrite bexit cmd menu} {
     set root [hget $infohash root]
 
     set index [$menu selection get]
@@ -265,6 +265,9 @@ proc FileSelect {infohash bselect bback binfo bwrite cmd menu} {
 	lappend $root $f
     } elseif {eq $cmd $bback} {
 	lset $root -1
+    }
+    elseif {eq $cmd $bexit} {
+	done
     }
 
     # If we are back at the root level, we need to do file.devs
@@ -307,7 +310,7 @@ proc FileSelect {infohash bselect bback binfo bwrite cmd menu} {
     }
 
     #Re-add the infohash into the -commandaction.
-    $menu configure -commandaction [list FileSelect $infohash $bselect $bback $binfo $bwrite]
+    $menu configure -commandaction [list FileSelect $infohash $bselect $bback $binfo $bwrite $bexit]
 }
 
 set h [hash {}]
@@ -319,11 +322,13 @@ set bselect [lcdui.command -label Select -longlabel Select -type item]
 set bback [lcdui.command -label Back -longlabel Back -type item]
 set binfo [lcdui.command -label Info -longlabel "File Info" -type item]
 set bwrite [lcdui.command -label Write -longlabel "Write File" -type item]
+set bexit [lcdui.command -label Exit -longlabel "Exit" -type exit]
 set browser [lcdui.list -selectcommand $bselect -title "File Browser" \
-		 -commandaction [list FileSelect $h $bselect $bback $binfo $bwrite]]
+		 -commandaction [list FileSelect $h $bselect $bback $binfo $bwrite $bexit]]
 $browser addcommand $bback
 $browser addcommand $binfo
 $browser addcommand $bwrite
+$browser addcommand $bexit
 $browser setcurrent
 foreach d $devs {
     $browser append $d
