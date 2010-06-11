@@ -557,7 +557,7 @@ set :run  [/cmd -label Run -longlabel "Run the code" -type ok]
 set :undo [/cmd -label Undo -longlabel "Undo edit" -type cancel]
 set :errc  [/cmd -label Errors -longlabel "Show errors" -type item]
 set :outc  [/cmd -label Output -longlabel "Show output" -type item -priority 2]
-set :sample [/cmd -label Examples -longlabel "Examples" -type item -priority 3]
+set :sample [/cmd -label Examples -longlabel "Examples" -type back -priority 3]
 set :exit [/cmd -label Exit -longlabel "Exit Hecl" -type item -priority 4]
 
 $SourceCode conf -commandaction [: {cmd main} {
