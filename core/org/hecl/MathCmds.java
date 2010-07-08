@@ -561,6 +561,7 @@ public class MathCmds extends org.hecl.Operator {
 	cmdtable.put("toRadians",new MathCmds(TORADIANS,1,1));
 	// random... different implementation for j2se and j2me
 	cmdtable.put("random",new MathCmds(RANDOM,0,0));
+        cmdtable.put("round",new MathCmds(ROUND,1,1));
 //#endif
 
 	// Stuff available only in j2se
@@ -571,7 +572,6 @@ public class MathCmds extends org.hecl.Operator {
 	cmdtable.put("acos",new MathCmds(ACOS,1,1));
 	cmdtable.put("atan",new MathCmds(ATAN,1,1));
 	cmdtable.put("exp",new MathCmds(EXP,1,1));
-	cmdtable.put("round",new MathCmds(ROUND,1,1));
 
 //#if javaversion > 1.5
 	cmdtable.put("signum",new MathCmds(SIGNUM,1,1));
